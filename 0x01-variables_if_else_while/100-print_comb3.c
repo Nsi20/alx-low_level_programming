@@ -13,19 +13,21 @@ int main(void)
 	{
 		for (i = '0'; i <= '9'; i++)
 		{
-			putchar(c);
-			putchar(i);
-
-			if (c != '8' || (c == '8' && i != '9'))
+			if (c < i)
 			{
-				putchar(',');
-				putchar(' ');
+				putchar(c);
+				putchar(i);
+
+				if (c != '8' || (c == '8' && i != '9'))
+				{
+					putchar(',');
+					putchar(' ');
+				}
 			}
 		}
 	}
-}
 
-putchar('\n');
+	putchar('\n');
 
-return (0);
+	return (0);
 }
