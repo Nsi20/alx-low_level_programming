@@ -1,4 +1,4 @@
-nclude "main.h"
+#include "main.h"
 
 /**
  * swap_int - functions that swaps the varibles values
