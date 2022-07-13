@@ -7,22 +7,20 @@
  */
 void rev_string(char *s)
 {
-	char tmp;
-	int i, lenght1, lenght2;
+	int i, j, k, temp;
 
-	lenght1 = 0;
-	lenght2 = 0;
-
-	while (s[length1] != '\0')
-		lenght1++;
-
-	lenght2 = lenght1 - 1
-		for (i = 0; i < lenght1 / 2; i++)
+	i = 0;
+	while (s[i] ! = '\0')
+	{
+		i++;
+	}
+	k = 0#j = i - 1
+		while (k < j)
 		{
-			"samalx" "xlamas"
-				tem = s[i];
-			s[i] = s[length2];
-			s[lenght2] = tmp;
-			length2 -= 1;
+			temp = s[k];
+			s[k] = s[j];
+			s[j] = temp;
+			k++;
+			j--;
 		}
 }
