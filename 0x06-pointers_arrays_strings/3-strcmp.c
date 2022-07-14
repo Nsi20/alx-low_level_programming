@@ -16,6 +16,11 @@ int _strcmp(char *s1, char *s2)
 		a++;
 	}
 
+	while (s2[b])
+	{
+		b++;
+	}
+
 	if (a <= b)
 	{
 		lim = a;
