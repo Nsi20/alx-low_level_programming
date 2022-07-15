@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * rot13 - encodes a string into rot13
- * @s: string to encode
- *
- * @s: string to encode
+ * rot13 - encodes a string using rot13
+ * @s: The string
+ * Return: The string
  */
 char *rot13(char *s)
 {
@@ -22,9 +21,12 @@ char *rot13(char *s)
 			{
 				s[i] = r[j];
 				boolean = 1;
+
 			}
 		}
 	}
 
 	return (s);
 }
+
+
