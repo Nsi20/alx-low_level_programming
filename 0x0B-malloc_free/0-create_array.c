@@ -9,12 +9,16 @@
  */
 char *create_array(unsigned int size, char c)
 {
-	char *pstr;
 	unsigned int i;
+	char *s;
 
-	pstr = malloc(sizeof(char) * size);
+	if (size == 0)
+		return (NULL);
+	s = (char *)malloc(size * sizeof(char));
+	if (s == NULL)
+		return (NULL);
 	for (i = 0; i < size; i++)
-		pstr[i] = c;
-	pstr[i] = 0;
-	return (size < 1 ? 0 : pstr);
+		s[i] = c;
+
+	return (s);
 }
