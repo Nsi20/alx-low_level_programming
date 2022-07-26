@@ -1,47 +1,51 @@
-#include "main.h"
+#include <stdlib.h>
 
 /**
- * len - returns length of str
- * @str: string to be counted
- * Return: length of the string
+ * strtow - converts a string into its separate words
+ *
+ * @str: string to convert into words
+ *
+ * Return: 2d array pointer
  */
-
-int len(char *str)
+char **strtow(char *str)
 {
-	int len = 0;
+	char **ret, *ptr = str;
+	int wc = 0, i = 0;
 
-	if (str != NULL)
+	if (str == 0 || *str == 0)
+		return (0);
+	while (*ptr)
 	{
-		while (str[len])
-			len++;
+		if (!(*ptr == ' ') && (*(ptr + 1) == ' ' || *(ptr + 1) == 0))
+			wc++;
+		ptr++;
 	}
-	return (len);
-}
-
-/**
- * num_words - counts the number of words in str
- * @str: string to be used
- * Return: number of words
- */
-int num_words(char *str)
-{
-	int i = 0, words = 0;
-
-	while (i <= len(str))
+	if (wc == 0)
+		return (NULL);
+	ret = malloc((wc + 1) * sizeof(char *));
+	if (ret == 0)
+		return (0);
+	while (*str)
 	{
-		if ((str[i] != ' ') && (str[i] != '\0'))
+		if (*str != ' ')
 		{
-			i++;
-		}
-		else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-		{
-			words += 1;
-			i++;
+			for (ptr = str, wc = 0; *ptr != ' ' && *ptr != 0;)
+				wc++, ptr++;
+			ret[i] = malloc(wc + 1);
+			if (ret[i] == 0)
+			{
+				while (i >= 0)
+					free(ret[--i]);
+				free(ret);
+				return (0);
+			}
+			ptr = ret[i++];
+			while (*str != ' ' && *str != 0)
+				*ptr++ = *str++;
+			*ptr = 0;
 		}
 		else
-		{
-			i++;
-		}
+			str++;
 	}
-	return (words);
-}
+	ret[i] = 0;
+	return (ret);
