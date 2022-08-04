@@ -1,5 +1,5 @@
-#ifndef _HEADER_
-#define _HEADER_
+#ifndef VARIADIC_FUNCTIONS_H
+#define VARIADIC_FUNCTIONS_H
 #include <stdarg.h>
 
 int _putchar(char c);
@@ -13,13 +13,15 @@ void print_a_float(char *separator, va_list args);
 void print_a_char_ptr(char *separator, va_list args);
 
 /**
- * struct format_types - Struct format_types
- * @identifier: The conversion specifier
- * @f: The function pointer
+ * struct format - Data type of a format.
+ * @op: Format.
+ * @f: Function.
+ *
  */
+
 typedef struct format_types
 {
-	char *identifier;
-	void (*f)(char *separator, va_list args);
-} f_dt;
-#endif`
+	char *op;
+	void (*f)(va_list all);
+} f;
+#endif
