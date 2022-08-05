@@ -90,10 +90,11 @@ void print_all(const char * const format, ...)
 				ops[j].f(all);
 				break;
 			}
+			j++;
 		}
 		i++;
 	}
 
 	printf("\n");
-	printf("\n");
+	va_end(all);
 }
