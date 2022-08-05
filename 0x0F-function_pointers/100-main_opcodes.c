@@ -1,39 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <udis86.h>
-
 
 /**
- * main - ...
- * @argc: ...
- * @argv: ...
+ * main - print hex opcodes of main up to n bytes passed in as an argument
  *
- * Return: ...
+ * @ac: number of arguments
+ * @av: array of argument strings
+ *
+ * Return: 0 on success
  */
-int main(int argc, char *argv[])
+int main(int ac, char *av[])
 {
-	int i, n;
+	unsigned char *f = (unsigned char *) (long int) main;
+	int n, i;
 
-
-	if (argc != 2)
+	if (ac != 2)
 	{
 		printf("Error\n");
 		return (1);
 	}
-	n = atoi(argv[1]);
+	n = atoi(av[1]);
 	if (n < 0)
 	{
 		printf("Error\n");
-		exit(2);
+		return (2);
 	}
-
-	for (i = 0; i < n; i++)
-	{
-		printf("%02hhx", *((char *)main + i));
-		if (i < n - 1)
-			printf(" ");
-		else
-			printf("\n");
-	}
+	if (n > 0)
+		printf("%02x", *f++);
+	for (i = 1; i < n; i++)
+		printf(" %02x", *f++);
+	if (n > 0)
+		printf("\n");
 	return (0);
 }
