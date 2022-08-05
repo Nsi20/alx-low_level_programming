@@ -3,30 +3,37 @@
 #include <stdio.h>
 
 /**
- * main - ...
- * @argc: ...
- * @argv: ...
+ * main - calculates two numbers given a string
  *
- * Return: ...
+ * @ac: number of arguments
+ * @av: array of argument strings
+ *
+ * Return: 0 on success.
  */
-int main(int argc, char *argv[])
+int main(int ac, char *av[])
 {
-	int (*oprt)(int, int);
+	int a, b;
+	int (*f)(int, int);
 
-	if (argc != 4)
+	if (ac != 4)
 	{
 		printf("Error\n");
-		exit(98);
+		return (98);
 	}
-
-	oprt = get_op_func(argv[2]);
-
-	if (!oprt)
+	a = atoi(av[1]);
+	b = atoi(av[3]);
+	f = get_op_func(av[2]);
+	if (f == NULL || av[2][1] != 0)
 	{
 		printf("Error\n");
-		exit(99);
+		return (99);
+	}
+	if ((av[2][0] == '/' || av[2][0] == '%') && b == 0)
+	{
+		printf("Error\n");
+		return (100);
 	}
 
-	printf("%d\n", oprt(atoi(argv[1]), atoi(argv[3])));
+	printf("%d\n", f(a, b));
 	return (0);
 }
