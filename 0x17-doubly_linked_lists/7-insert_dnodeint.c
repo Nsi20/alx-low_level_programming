@@ -1,43 +1,54 @@
 #include "lists.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
- * insert_dnodeint_at_index - inserts a new node at a given position
- * @h: double pointer to the beginning of the linked list
- * @idx: index at which to insert the new node
- * @n: data to enter into new node
+ * insert_dnodeint_at_index - adds node at a given index
  *
- * Return: pointer to the new node, or NULL on failure
+ * @head: pointer to the head
+ * @n: data to add
+ * @idx: position to insert
+ * Return: pointer to new node
  */
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
-{
-	dlistint_t *new, *next, *current;
-	unsigned int i;
 
-	if (h == NULL)
-		return (NULL);
-	if (idx != 0)
-	{
-		current = *h;
-		for (i = 0; i < idx - 1 && current != NULL; i++)
-			current = current->next;
-		if (current == NULL)
-			return (NULL);
-	}
+dlistint_t *insert_dnodeint_at_index(
+		dlistint_t **head, unsigned int idx, int n)
+{
+	dlistint_t *new, *h;
+	unsigned int i = 0;
+
+	if (!head)
+		return (0);
 	new = malloc(sizeof(dlistint_t));
-	if (new == NULL)
-		return (NULL);
+	if (!new)
+		return (0);
 	new->n = n;
-	if (idx == 0)
+	if (!(*head) && idx == 0)
 	{
-		next = *h;
-		*h = new;
-		new->prev = NULL;
+		*head = new;
+		return (new);
 	}
-	else
+	h = *head;
+	while (h->next && i < idx)
 	{
-		new->prev = current;
-		next = current->next;
-		current->next = new;
+		h = h->next;
+		i++;
 	}
+	if (i == idx)
+	{
+		new->next = h;
+		if (h->prev)
+			h->prev->next = new;
+		else
+			*head = new;
+		new->prev = h->prev;
+		h->prev = new;
+	} else if (idx == i + 1)
+	{
+		h->next = new;
+		new->prev = h;
+	} else
+	{
+		free(new);
+		return (0);
+	}
+	return (new);
+}
